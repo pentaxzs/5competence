@@ -1,65 +1,48 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { roles } from '@/data/competencies';
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="min-h-screen flex flex-col items-center justify-center px-4 py-16">
+      {/* Header */}
+      <div className="text-center mb-14">
+        <p className="text-xs tracking-[0.25em] uppercase text-stone-400 mb-4 font-medium">
+          AI Era Competency Radar
+        </p>
+        <h1 className="text-4xl sm:text-5xl font-light text-stone-800 tracking-tight mb-5">
+          5 Competences
+        </h1>
+        <p className="text-stone-500 text-base leading-relaxed max-w-sm mx-auto">
+          나의 현재와 미래 역량을 레이더 차트로 시각화하세요.
+          <br />
+          역할을 선택해 시작하세요.
+        </p>
+      </div>
+
+      {/* Role Cards — mobile: 세로 스택, sm+: 3열 */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-2xl">
+        {roles.map((role) => (
+          <Link
+            key={role.id}
+            href={`/${role.id}`}
+            className="group bg-white border border-stone-200 rounded-2xl p-5 sm:p-6 flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 text-left sm:text-center active:bg-stone-50 sm:hover:border-stone-400 sm:hover:shadow-md transition-all duration-200"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            <span className="text-3xl sm:text-4xl sm:mb-4 shrink-0">{role.emoji}</span>
+            <div className="flex-1 sm:flex-none">
+              <h2 className="text-sm font-semibold text-stone-800 mb-0.5 sm:mb-1">{role.label}</h2>
+              <p className="text-xs text-stone-400 leading-relaxed">{role.description}</p>
+            </div>
+            <span className="text-stone-300 sm:hidden shrink-0">›</span>
+            <span className="hidden sm:inline mt-5 text-xs text-stone-400 group-hover:text-stone-700 transition-colors">
+              시작하기 →
+            </span>
+          </Link>
+        ))}
+      </div>
+
+      <p className="mt-12 text-xs text-stone-300">
+        전통 역량과 AI 시대 역량 중 5가지를 직접 선택합니다
+      </p>
+    </main>
   );
 }
