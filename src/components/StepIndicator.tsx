@@ -15,20 +15,20 @@ export default function StepIndicator({ current }: { current: number }) {
           <div className="flex flex-col items-center">
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold transition-colors
-                ${current === step.n ? 'bg-stone-800 text-white' : current > step.n ? 'bg-stone-400 text-white' : 'bg-stone-200 text-stone-400'}`}
+                ${current === step.n ? 'bg-stone-800 dark:bg-stone-100 text-white dark:text-stone-900' : current > step.n ? 'bg-stone-500 dark:bg-stone-500 text-white' : 'bg-stone-200 dark:bg-stone-700 text-stone-600 dark:text-stone-400'}`}
             >
               {current > step.n ? '✓' : step.n}
             </div>
             {/* 라벨: 모바일에서는 현재 step만 표시 */}
             <span
               className={`mt-1 text-[10px] whitespace-nowrap transition-all
-                ${current === step.n ? 'text-stone-700 font-medium opacity-100' : 'text-stone-400 opacity-0 sm:opacity-100'}`}
+                ${current === step.n ? 'text-stone-700 dark:text-stone-200 font-medium opacity-100' : 'text-stone-600 dark:text-stone-400 opacity-0 sm:opacity-100'}`}
             >
               {step.label}
             </span>
           </div>
           {i < STEPS.length - 1 && (
-            <div className={`w-8 sm:w-12 h-px mb-4 mx-1 ${current > step.n ? 'bg-stone-400' : 'bg-stone-200'}`} />
+            <div className={`w-8 sm:w-12 h-px mb-4 mx-1 ${current > step.n ? 'bg-stone-500 dark:bg-stone-500' : 'bg-stone-200 dark:bg-stone-700'}`} />
           )}
         </div>
       ))}

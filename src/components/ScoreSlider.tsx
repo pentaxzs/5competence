@@ -18,12 +18,12 @@ export default function ScoreSlider({ label, value, onChange, color = 'blue' }: 
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-sm text-stone-700 font-medium leading-snug">{label}</span>
-        <span className={`text-base font-bold ${scoreColor}`}>{value}<span className="text-xs font-normal text-stone-300">/5</span></span>
+        <span className="text-sm text-stone-700 dark:text-stone-200 font-medium leading-snug">{label}</span>
+        <span className={`text-base font-bold ${scoreColor}`}>{value}<span className="text-xs font-normal text-stone-500 dark:text-stone-500">/5</span></span>
       </div>
       <div className="relative py-3">
         {/* 트랙 */}
-        <div className="relative h-1.5 rounded-full bg-stone-200">
+        <div className="relative h-1.5 rounded-full bg-stone-200 dark:bg-stone-700">
           <div
             className={`absolute left-0 top-0 h-full rounded-full ${trackColor} transition-all`}
             style={{ width: `${pct}%` }}
@@ -35,7 +35,7 @@ export default function ScoreSlider({ label, value, onChange, color = 'blue' }: 
               onClick={() => onChange(d)}
               style={{ left: `${((d - 1) / 4) * 100}%` }}
               className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full transition-all
-                ${d <= value ? `${dotActive} ring-2` : 'bg-stone-300'}`}
+                ${d <= value ? `${dotActive} ring-2` : 'bg-stone-300 dark:bg-stone-600'}`}
               aria-label={`${d}점`}
             />
           ))}
@@ -55,7 +55,7 @@ export default function ScoreSlider({ label, value, onChange, color = 'blue' }: 
       {/* 눈금 라벨 */}
       <div className="flex justify-between px-0.5">
         {DOTS.map((d) => (
-          <span key={d} className={`text-[9px] ${d === value ? scoreColor + ' font-bold' : 'text-stone-300'}`}>
+          <span key={d} className={`text-[9px] ${d === value ? scoreColor + ' font-bold' : 'text-stone-500 dark:text-stone-500'}`}>
             {d === 1 ? '기초' : d === 3 ? '보통' : d === 5 ? '전문가' : d}
           </span>
         ))}

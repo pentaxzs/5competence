@@ -30,6 +30,11 @@ export default function RadarChart({ labels, current, future }: Props) {
       chartRef.current.destroy();
     }
 
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const labelColor = isDark ? '#e7e5e4' : '#44403c';
+    const tickColor = isDark ? '#78716c' : '#a8a29e';
+    const gridColor = isDark ? 'rgba(120,113,108,0.35)' : 'rgba(168,162,158,0.3)';
+
     chartRef.current = new Chart(canvasRef.current, {
       type: 'radar',
       data: {
@@ -44,6 +49,7 @@ export default function RadarChart({ labels, current, future }: Props) {
             pointBackgroundColor: 'rgba(59, 130, 246, 0.9)',
             pointRadius: 4,
             pointHoverRadius: 6,
+            pointStyle: 'circle',
           },
           {
             label: '미래 목표',
@@ -55,6 +61,7 @@ export default function RadarChart({ labels, current, future }: Props) {
             pointBackgroundColor: 'rgba(244, 63, 94, 0.8)',
             pointRadius: 4,
             pointHoverRadius: 6,
+            pointStyle: 'circle',
           },
         ],
       },
@@ -63,14 +70,7 @@ export default function RadarChart({ labels, current, future }: Props) {
         maintainAspectRatio: true,
         plugins: {
           legend: {
-            position: 'bottom',
-            labels: {
-              font: { size: 12, family: 'inherit' },
-              color: '#57534e',
-              padding: 20,
-              usePointStyle: true,
-              pointStyleWidth: 10,
-            },
+            display: false,
           },
           tooltip: {
             callbacks: {
@@ -85,18 +85,18 @@ export default function RadarChart({ labels, current, future }: Props) {
             ticks: {
               stepSize: 1,
               font: { size: 10, family: 'inherit' },
-              color: '#a8a29e',
+              color: tickColor,
               backdropColor: 'transparent',
             },
             pointLabels: {
               font: { size: 12, weight: 500, family: 'inherit' },
-              color: '#44403c',
+              color: labelColor,
             },
             grid: {
-              color: 'rgba(168, 162, 158, 0.3)',
+              color: gridColor,
             },
             angleLines: {
-              color: 'rgba(168, 162, 158, 0.3)',
+              color: gridColor,
             },
           },
         },
@@ -111,6 +111,16 @@ export default function RadarChart({ labels, current, future }: Props) {
   return (
     <div className="w-full max-w-md mx-auto">
       <canvas ref={canvasRef} />
+      <div className="flex justify-center items-center gap-5 mt-1">
+        <span className="flex items-center gap-1.5 text-xs text-stone-600 dark:text-stone-400">
+          <span className="w-3 h-3 rounded-full bg-blue-500 shrink-0" />
+          현재 역량
+        </span>
+        <span className="flex items-center gap-1.5 text-xs text-stone-600 dark:text-stone-400">
+          <span className="w-3 h-3 rounded-full bg-rose-400 shrink-0" />
+          미래 목표
+        </span>
+      </div>
     </div>
   );
 }

@@ -31,7 +31,7 @@ export default function ExportPanel({ chartContainerId, shareUrl, roleLabel }: P
     <div className="space-y-4">
       {/* 다운로드 */}
       <div>
-        <p className="text-xs font-medium text-stone-400 uppercase tracking-wide mb-2">다운로드</p>
+        <p className="text-xs font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wide mb-2">다운로드</p>
         <div className="flex flex-wrap gap-2">
           {[
             { label: 'PNG', type: 'png', fn: () => { const el = getEl(); if (el) return downloadPng(el); return Promise.resolve(); } },
@@ -57,7 +57,7 @@ export default function ExportPanel({ chartContainerId, shareUrl, roleLabel }: P
 
       {/* 공유 */}
       <div>
-        <p className="text-xs font-medium text-stone-400 uppercase tracking-wide mb-2">공유</p>
+        <p className="text-xs font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wide mb-2">공유</p>
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => shareToTwitter(shareUrl, roleLabel)}
@@ -79,7 +79,7 @@ export default function ExportPanel({ chartContainerId, shareUrl, roleLabel }: P
           </button>
           <button
             onClick={copyUrl}
-            className="px-4 py-2 rounded-xl border border-stone-300 text-stone-700 text-sm font-medium hover:bg-stone-100 transition-colors"
+            className="px-4 py-2 rounded-xl border border-stone-300 dark:border-stone-600 text-stone-700 dark:text-stone-200 text-sm font-medium hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
           >
             {copied ? '✓ 복사됨' : '🔗 링크 복사'}
           </button>
