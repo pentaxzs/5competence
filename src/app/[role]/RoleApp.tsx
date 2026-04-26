@@ -31,7 +31,7 @@ export default function RoleApp({ role }: Props) {
   useEffect(() => {
     const state = searchParams.get('state');
     if (!state) return;
-    const decoded = decodeState(state);
+    const decoded = decodeState(state, role.competencies);
     if (!decoded) return;
     // 커스텀 역량은 URL에서 복원
     const restoredCustom: Competency[] = decoded.sel

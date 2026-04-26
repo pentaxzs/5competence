@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { downloadPng, downloadJpg, downloadPdf } from '@/lib/export';
 import { shareToTwitter, shareToLinkedIn, shareToKakao } from '@/lib/share';
 
@@ -14,6 +14,8 @@ export default function ExportPanel({ chartContainerId, shareUrl, roleLabel }: P
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState<string | null>(null);
 
+  const effectiveUrl = shareUrl;
+
   const getEl = () => document.getElementById(chartContainerId) as HTMLElement | null;
 
   const handle = async (type: string, fn: () => Promise<void>) => {
@@ -22,7 +24,7 @@ export default function ExportPanel({ chartContainerId, shareUrl, roleLabel }: P
   };
 
   const copyUrl = () => {
-    navigator.clipboard.writeText(shareUrl);
+    navigator.clipboard.writeText(effectiveUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -60,19 +62,19 @@ export default function ExportPanel({ chartContainerId, shareUrl, roleLabel }: P
         <p className="text-xs font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wide mb-2">공유</p>
         <div className="flex flex-wrap gap-2">
           <button
-            onClick={() => shareToTwitter(shareUrl, roleLabel)}
+            onClick={() => shareToTwitter(effectiveUrl, roleLabel)}
             className="px-4 py-2 rounded-xl bg-black text-white text-sm font-medium hover:opacity-80 transition-opacity"
           >
             𝕏 Twitter
           </button>
           <button
-            onClick={() => shareToLinkedIn(shareUrl)}
+            onClick={() => shareToLinkedIn(effectiveUrl)}
             className="px-4 py-2 rounded-xl bg-[#0A66C2] text-white text-sm font-medium hover:opacity-80 transition-opacity"
           >
             LinkedIn
           </button>
           <button
-            onClick={() => shareToKakao(shareUrl)}
+            onClick={() => shareToKakao(effectiveUrl)}
             className="px-4 py-2 rounded-xl bg-[#FEE500] text-stone-900 text-sm font-medium hover:opacity-80 transition-opacity"
           >
             카카오톡
